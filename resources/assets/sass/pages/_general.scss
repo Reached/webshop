@@ -1,0 +1,28 @@
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+// Entypo font icons
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+html {
+	-webkit-tap-highlight: none;
+}
+
+body {
+	background: #eeeeee;
+	font-family: $font-family;
+}
+
+a {
+	text-decoration: none;
+	color: $black;
+	font-weight: bold;
+	&:visited {
+		color: inherit;
+	}
+	&.active {
+		
+	}
+
+}

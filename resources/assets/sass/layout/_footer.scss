@@ -1,0 +1,17 @@
+footer {
+	height: 100px;
+	width: 100%;
+	background: white;
+	float: left;
+	margin-top: 80px;
+	line-height: 100px;
+	.copyright {
+		float: left;
+	}
+	.social-icons {
+		float: right;
+		img {
+			margin-left: 5px;
+		}
+	}
+}

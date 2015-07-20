@@ -1,0 +1,79 @@
+// The product grid for the frontpage and the products subpage.
+
+.product-grid {
+	float: left;
+	width: 100%;
+	margin-top: 50px;
+	.product {
+		width: 100%;
+		background: $white;
+		margin-bottom: 25px;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		border-bottom: 2px solid $lightgrey;
+		
+		float: left;
+		transition: .175s border linear;
+		a {
+			display: block;
+		}
+		.img-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+  		img {
+  			width: 100%;
+  			height: auto;
+  			margin-bottom: 25px;
+  		}
+      button {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 40px;
+        width: 100%;
+        text-align: center;
+        background: transparent;
+        font-size: 16px;
+        cursor: pointer;
+        border: 1px solid $lightgrey;
+        z-index: 10;
+        transform: translateY(-50%);
+        display: none;
+      }
+		}
+		.meta {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      padding: 0 25px;
+      background: #f7f7f7;
+      -webkit-border-bottom-right-radius: 3px;
+      -webkit-border-bottom-left-radius: 3px;
+      -moz-border-radius-bottomright: 3px;
+      -moz-border-radius-bottomleft: 3px;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+		h2 {
+			float: left;
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.price {
+			float: right;
+			font-weight: normal;
+		}
+		
+		&:hover {
+			border-bottom: 2px solid darken($lightgrey, 5%);
+		}
+	}
+}
+
+@media (max-width: 640px) {
+  .product-grid {
+  	margin-top: 30px;
+  }
+}

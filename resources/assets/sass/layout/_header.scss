@@ -1,0 +1,107 @@
+// Contains the styling for the menu header.
+
+.main-nav {
+  height: 170px;
+  width: 100%;
+  background: $white;
+  float: left;
+  position: relative;
+  border-bottom: 2px solid $lightgrey;
+  .logo {
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 35px;
+    img {
+      height: 90px;
+      max-width: 100%;
+      margin-top: 20px;
+    }
+  }
+  .shopping-cart,
+  .shopping-cart-button {
+    .entypo-basket {
+      position: relative;
+    }
+   .has-items {
+      position: absolute;
+      top: -15px;
+      left: -18px;
+      font-size: 12px;
+      background: tomato;
+      height: 20px;
+      width: 20px;
+      display: inline;
+      border-radius: 50%;
+      line-height: 20px;
+      color: $white;
+   }
+  }
+	ul.nav {
+    width: 80%;
+    margin: 0 auto;
+    height: 70px;
+		li {
+      float: left;
+      text-align: center;
+      width: 25%; 
+      line-height: 70px;
+      a {
+        display: block;
+        width: 100%;
+        font-weight: normal;
+      }
+		}
+	}
+  ul.mobile-nav {
+    display: none;
+  }
+  button.open-mobile-nav,
+  button.shopping-cart-button {
+    float: left;
+    height: 40px;
+    background: none;
+    display: none;
+    font-size: 16px;
+    font-family: $font-family;
+    cursor: pointer;
+    &:focus {
+      outline: 0;
+    }
+  }
+  button.open-mobile-nav {
+    width: 50%;
+    border: none;
+    .entypo-menu {
+      font-size: 25px;
+    }
+  }
+  button.shopping-cart-button {
+    width: 50%;
+    border: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-nav {
+    height: 125px;
+    .logo {
+      height: 70px;
+      img {
+        margin-top: 5px;
+        max-width: 40%;
+      }
+    }
+    ul.nav {
+      display: none;
+    }
+    button.open-mobile-nav,
+    button.shopping-cart-button {
+      display: block;
+      margin-top: 15px;
+    }
+  }
+}

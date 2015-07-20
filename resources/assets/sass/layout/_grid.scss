@@ -1,0 +1,33 @@
+// This is the file that controls our simple grid.
+
+.container {
+	width: 1024px;
+	height: auto;
+	max-width: 90%;
+	margin: 0 auto;
+	position: relative;
+}
+
+.col {
+	float: left;
+	padding: 0 15px;
+}
+
+.col3 {
+	width: 33%;
+}
+
+@media (max-width: 768px) {
+  .col3 {
+  	width: 50%;
+  }
+  .container {
+  	max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .col3 {
+  	width: 100%;
+  }
+}
