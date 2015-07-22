@@ -1,6 +1,7 @@
 @extends('frontend.shop')
 
 @section('shoppingCart')
+    <a href="/">Continue shopping?</a>
     @foreach($cartContent as $content)
         <li>{{ $content->name }} {{ $content->qty }} {{ $content->price }}</li>
         {!! Form::open(['url' => 'cart/remove']) !!}

@@ -16,6 +16,7 @@ class CartController extends Controller
     public function showCart() {
         $cartContent = Cart::content();
         $cartTotal = Cart::total();
+
         return view('frontend.cart', compact('cartContent', 'cartTotal'));
     }
 
@@ -59,7 +60,10 @@ class CartController extends Controller
 
     public function showCheckout() {
 
-        return view('frontend.checkout');
+        $cartContent = Cart::content();
+        $cartTotal = Cart::total();
+
+        return view('frontend.checkout', compact('cartContent', 'cartTotal'));
     }
 
 
