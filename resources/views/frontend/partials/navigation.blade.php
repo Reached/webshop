@@ -12,7 +12,7 @@ Hi {{ Auth::user()->name }}
     </div>
 </div>
 
-<a href="/" class="logo"><img src="images/logo.svg"></a>
+<a href="/" class="logo"><img src="/images/logo.svg"></a>
     <ul class="nav">
       <li><a href="#">Our Products</a></li>
       <li><a href="#">About Us</a></li>
