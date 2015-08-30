@@ -18,6 +18,12 @@ class ProductsController extends Controller
 
     }
 
+    public function showSingleProduct($id) {
+        $product = Product::findOrFail($id);
+
+        return view('frontend.show', compact('product'));
+    }
+
     function money($amount, $symbol = 'DKK') {
         return $symbol . money_format('%i', $amount);
     }

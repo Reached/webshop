@@ -14,6 +14,8 @@
 
       {{-- Product grid --}}
       @yield('products')
+      {{-- Single product --}}
+      @yield('product')
       {{-- Shopping cart --}}
       @yield('shoppingCart')
       {{-- Checkout --}}

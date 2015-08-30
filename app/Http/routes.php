@@ -1,9 +1,6 @@
 <?php
 
-use Stripe;
-
-/*
-|--------------------------------------------------------------------------
+/*|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
@@ -15,6 +12,9 @@ use Stripe;
 
 // Show the frontpage
 Route::get('/', 'ProductsController@showAllProducts');
+
+// Show the frontpage
+Route::get('/product/{id}', 'ProductsController@showSingleProduct');
 
 // Show the shopping cart
 Route::get('/cart', 'CartController@showCart');
@@ -40,19 +40,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', 'AdminController@showDashboard');
     Route::get('/orders', 'AdminController@showOrders');
 
-});
-
-Route::post('/verifyPayment', function() {
-
-    $stripe = Stripe::make('pk_test_4VelJUqrjkHEk1VkRvugyM94', 'pk_test_4VelJUqrjkHEk1VkRvugyM94');
-
-    $charge = \Stripe\Stripe::create([
-        'customer' => 'cus_4EBumIjyaKooft',
-        'currency' => 'USD',
-        'amount'   => 50.49,
-    ]);
-
-    echo $charge['id'];
 });
 
 // Authentication routes

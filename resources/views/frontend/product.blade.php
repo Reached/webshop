@@ -13,7 +13,7 @@
         </a>
         {!! Form::open(['url' => '/cart']) !!}
             {!! Form::hidden('id', $product->id) !!}
-            {!! Form::submit('Submit', ['class' => 'button']) !!}
+            {!! Form::submit('Add to basket', ['class' => 'button']) !!}
         {!! Form::close() !!}
     </article>
 </div>
