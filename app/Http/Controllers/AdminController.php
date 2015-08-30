@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
     public function showDashboard() {
-        return 'Dashboard';
+        return view('backend.dashboard');
     }
 
     public function showOrders() {

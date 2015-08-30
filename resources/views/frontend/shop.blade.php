@@ -3,7 +3,6 @@
 	<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="publishable-key" content="{{ Config::get('services.stripe.publishable_key') }}">
     <link rel="stylesheet" type="text/css" href="/css/app.css">
     <title>Webshop</title>
   </head>
