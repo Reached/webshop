@@ -4,7 +4,7 @@
                 this.form = $('#billing-form');
                 this.submitButton = this.form.find('input[type=submit]');
 
-                var stripeKey = $('meta[name="publishable-key"]').attr('content');
+                var stripeKey = 'pk_test_4VelJUqrjkHEk1VkRvugyM94'; //$('meta[name="publishable-key"]').attr('content');
 
                 Stripe.setPublishableKey(stripeKey);
 
@@ -41,4 +41,39 @@
         };
 
         stripeBilling.init();
+
+    var submitAjaxRequest = function(e) {
+        var form = $(this);
+        var method = form.find('input[name="_method"]').val() || 'POST';
+        var submitButton = form.find('input[type="submit"]');
+        $.ajaxSetup({
+            beforeSend:function(){
+                submitButton.addClass('disabled').attr('disabled', true);
+            },
+            complete:function(){
+                submitButton.removeClass('disabled').attr('disabled', false);
+            }
+        });
+        $.ajax({
+            type: method,
+            url: form.prop('action'),
+            data: form.serialize(),
+            dataType: 'json',
+            success: function(json) {
+                var cart = $('#shopping-cart');
+                alert(json.data);
+                cart.html(json.data);
+            },
+            error: function(jqXhr, json) {
+                var errors = jqXhr.responseJSON;
+                $.each(errors, function(key, value) {
+                });
+            }
+        });
+
+        // Prevent the form from submitting normally
+        e.preventDefault();
+    };
+    $('form[data-remote]').on('submit', submitAjaxRequest);
 })();
+

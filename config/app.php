@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Mpociot\VatCalculator\VatCalculatorServiceProvider::class,
 
         /*
          * Application Service Providers...

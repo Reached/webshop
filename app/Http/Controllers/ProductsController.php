@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Product;
+use Mpociot\VatCalculator\VatCalculator;
 use App\Http\Controllers\Controller;
 
 class ProductsController extends Controller
@@ -15,7 +16,6 @@ class ProductsController extends Controller
         $products = Product::all();
 
         return view('frontend.products', compact('products'));
-
     }
 
     public function showSingleProduct($id) {

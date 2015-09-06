@@ -34,6 +34,9 @@ Route::post('/cart/updateitem', 'CartController@updateCartItem');
 // Checkout view
 Route::get('/cart/checkout', 'CartController@showCheckout');
 
+// Verify the payment
+Route::post('/cart/checkout', 'CartController@verifyPayment');
+
 // Admin routes
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
