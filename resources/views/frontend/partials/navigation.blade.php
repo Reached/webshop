@@ -18,7 +18,7 @@ Hi {{ Auth::user()->name }}
       <li><a href="#">About Us</a></li>
       <li><a href="#">Contact Us</a></li>
       <li class="shopping-cart">
-        <a href="/cart"><i class="entypo-basket"><span class="has-items" id="shopping-cart">{{ Cart::count() }}</span></i> Your Cart</a>
+        <a href="/cart"><span id="shopping-cart">{{ Cart::count() }}</span> Your Cart</a>
       </li>
     </ul>
     <button class="open-mobile-nav"><i class="entypo-menu"></i></button>

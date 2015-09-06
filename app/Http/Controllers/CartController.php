@@ -18,7 +18,11 @@ class CartController extends Controller
         $cartContent = Cart::content();
         $cartTotal = Cart::total();
 
-        return view('frontend.cart', compact('cartContent', 'cartTotal'));
+        // Get the price with VAT
+        $withVat = \VatCalculator::calculate($cartTotal, 'DK');
+        $taxRate = \VatCalculator::getTaxRate() * 100;
+
+        return view('frontend.cart', compact('cartContent', 'cartTotal', 'withVat', 'taxRate'));
     }
 
     public function addItemToCart() {
@@ -79,10 +83,12 @@ class CartController extends Controller
         $data = Input::all();
         $amount = Cart::total() * 100;
 
+        $withVat = \VatCalculator::calculate($amount, 'DK');
+
         // Create the charge on Stripe's servers - this will charge the user's card
         try {
             $charge = \Stripe\Charge::create(array(
-                    "amount" => $amount, // amount in cents, again
+                    "amount" => $withVat, // amount in cents, again
                     "currency" => "dkk",
                     "source" => $token,
                     "description" => "Example charge")

@@ -1,3 +1,7 @@
+function incrementCount() {
+    count++;
+}
+
 (function() {
         var stripeBilling = {
             init: function() {
@@ -61,7 +65,7 @@
             dataType: 'json',
             success: function(json) {
                 var cart = $('#shopping-cart');
-                alert(json.data);
+
                 cart.html(json.data);
             },
             error: function(jqXhr, json) {

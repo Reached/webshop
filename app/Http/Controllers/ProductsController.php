@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Product;
-use Mpociot\VatCalculator\VatCalculator;
 use App\Http\Controllers\Controller;
 
 class ProductsController extends Controller

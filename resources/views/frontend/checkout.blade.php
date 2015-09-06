@@ -14,6 +14,7 @@
 
     {{ $cartTotal }} DKK
 
+
     <h3>Address information: </h3>
     {!! Form::open(['url' => '/cart/checkout', 'id' => 'billing-form']) !!}
     {!! Form::text('name', null, ['placeholder' => 'Your name', 'data-stripe' => 'name']) !!}

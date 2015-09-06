@@ -743,16 +743,16 @@
         },
         {
             "name": "mpociot/vat-calculator",
-            "version": "1.4.0",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpociot/vat-calculator.git",
-                "reference": "fbc635b01844054ee232ca7276170443f1730c32"
+                "reference": "61dfd1e4f4a214ffc0b0d2e2880fc078101172bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpociot/vat-calculator/zipball/fbc635b01844054ee232ca7276170443f1730c32",
-                "reference": "fbc635b01844054ee232ca7276170443f1730c32",
+                "url": "https://api.github.com/repos/mpociot/vat-calculator/zipball/61dfd1e4f4a214ffc0b0d2e2880fc078101172bf",
+                "reference": "61dfd1e4f4a214ffc0b0d2e2880fc078101172bf",
                 "shasum": ""
             },
             "require": {
@@ -789,7 +789,7 @@
                 "vat",
                 "vat calculation"
             ],
-            "time": "2015-09-03 08:06:15"
+            "time": "2015-09-06 18:07:18"
         },
         {
             "name": "mtdowling/cron-expression",
