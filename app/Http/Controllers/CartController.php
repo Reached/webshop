@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Cart;
 use Response;
@@ -76,30 +78,28 @@ class CartController extends Controller
     public function verifyPayment() {
         // Set your secret key: remember to change this to your live secret key in production
         // See your keys here https://dashboard.stripe.com/account/apikeys
-        \Stripe\Stripe::setApiKey("sk_test_4VelQ1AOsxYcZYGZFQeb2DfL");
+        \Stripe\Stripe::setApiKey(env('STRIPE_API_KEY'));
 
         // Get the credit card details submitted by the form
         $token = Input::get('stripeToken');
-        $data = Input::all();
-        $amount = Cart::total() * 100;
 
-        $withVat = \VatCalculator::calculate($amount, 'DK');
+        $user = Auth::user();
 
-        // Create the charge on Stripe's servers - this will charge the user's card
-        try {
-            $charge = \Stripe\Charge::create(array(
-                    "amount" => $withVat, // amount in cents, again
-                    "currency" => "dkk",
-                    "source" => $token,
-                    "description" => "Example charge")
-            );
+        $customer = \Stripe\Customer::create([
+                "source" => $token,
+                "description" => $user->email
+            ]
+        );
+        $data = $customer->sources->data;
 
-            return Response::json(['success', 200, 'message' => 'Your card was successfully charged.']);
-
-        } catch(\Stripe\Error\Card $e) {
-            return Response::json(['error', 'message' => $e->getMessage() ]);
+        foreach ($data as $item) {
+            $user->card_brand = $item->brand;
+            $user->card_last_four = $item->last4;
         }
+        $user->billing_id = $customer->id;
+        $user->save();
+
+        return 'Your order is now pending. The money will not be taken from your account before the products has been shipped.';
+
     }
-
-
 }

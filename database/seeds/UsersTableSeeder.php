@@ -15,7 +15,10 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'thelord',
             'email' => 'casper.aarby.sorensen@gmail.com',
-            'password' => bcrypt('Caspers88')
+            'password' => bcrypt('Caspers88'),
+            'address' => 'Haslevangsvej 78',
+            'zip' => '8210',
+            'city' => 'Aarhus V'
         ]);
     }
 }
