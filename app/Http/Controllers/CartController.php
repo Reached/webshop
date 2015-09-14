@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Events\OrderWasPlaced;
-use App\User;
 use Auth;
 use Event;
-use Illuminate\Http\Request;
 use Cart;
-use Mpociot\VatCalculator\VatCalculator;
 use Response;
 use Session;
 use App\Http\Requests;
@@ -99,7 +96,6 @@ class CartController extends Controller
 
         $billing_id = $customer->id;
 
-        $user->billing_id = $customer->id;
         $user->save();
 
         Event::fire(new OrderWasPlaced($amount, $billing_id));
