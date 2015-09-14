@@ -11,6 +11,7 @@
 <body>
     @include('backend.partials.navigation')
     @yield('dashboard')
+    @yield('content')
 
 
 </body>

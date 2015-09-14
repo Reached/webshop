@@ -14,13 +14,6 @@
 
     {{ $cartTotal }} DKK
 
-    {{-- Check if the user has an existing billing id --}}
-    @if(Auth::user()->billing_id !== null )
-        <p>You are authorized.</p>
-        {!!  Auth::user()->card_brand !!}
-        {!!  Auth::user()->card_last_four !!}
-    @else
-
         <h3>Address information: </h3>
         {!! Form::open(['url' => '/cart/checkout', 'id' => 'billing-form']) !!}
         {!! Form::text('name', Auth::user()->name, ['placeholder' => 'Your name', 'data-stripe' => 'name']) !!}
@@ -41,8 +34,5 @@
         <div class="payment-errors"></div>
 
         {!! Form::close() !!}
-    @endif
-
-
 
 @endsection

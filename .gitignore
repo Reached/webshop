@@ -3,3 +3,7 @@
 Homestead.yaml
 .idea
 .env
+
+*.xml
+
+*.xml

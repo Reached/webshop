@@ -22,8 +22,4 @@ class ProductsController extends Controller
 
         return view('frontend.show', compact('product'));
     }
-
-    function money($amount, $symbol = 'DKK') {
-        return $symbol . money_format('%i', $amount);
-    }
 }

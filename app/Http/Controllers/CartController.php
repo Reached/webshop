@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderWasPlaced;
 use App\User;
 use Auth;
+use Event;
 use Illuminate\Http\Request;
 use Cart;
+use Mpociot\VatCalculator\VatCalculator;
 use Response;
 use Session;
 use App\Http\Requests;
@@ -85,19 +88,21 @@ class CartController extends Controller
 
         $user = Auth::user();
 
+        // Get the amount total in the smallest denominator
+        $amount = Cart::total() * 100;
+
         $customer = \Stripe\Customer::create([
                 "source" => $token,
                 "description" => $user->email
             ]
         );
-        $data = $customer->sources->data;
 
-        foreach ($data as $item) {
-            $user->card_brand = $item->brand;
-            $user->card_last_four = $item->last4;
-        }
+        $billing_id = $customer->id;
+
         $user->billing_id = $customer->id;
         $user->save();
+
+        Event::fire(new OrderWasPlaced($amount, $billing_id));
 
         return 'Your order is now pending. The money will not be taken from your account before the products has been shipped.';
 

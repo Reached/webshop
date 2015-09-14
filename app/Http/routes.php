@@ -11,6 +11,8 @@
 */
 
 // Show the frontpage
+use App\Events\PodcastWasPurchased;
+
 Route::get('/', 'ProductsController@showAllProducts');
 
 // Show the frontpage
@@ -42,6 +44,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/dashboard', 'AdminController@showDashboard');
     Route::get('/orders', 'AdminController@showOrders');
+    Route::post('/orders/approve', 'AdminController@approveOrder');
 
 });
 
