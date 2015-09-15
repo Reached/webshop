@@ -20,7 +20,7 @@ return [
     ],
 
     'mandrill' => [
-        'secret' => '',
+        'secret' => 'ZyOkq4AwBOyILC7wpcJauQ',
     ],
 
     'ses' => [
@@ -28,10 +28,4 @@ return [
         'secret' => '',
         'region' => 'us-east-1',
     ],
-
-    'stripe' => [
-        'secret_key' => 'sk_test_4VelQ1AOsxYcZYGZFQeb2DfL',
-        'publishable_key' => 'pk_test_4VelJUqrjkHEk1VkRvugyM94'
-    ],
-
 ];

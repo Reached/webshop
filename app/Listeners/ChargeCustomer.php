@@ -6,6 +6,8 @@ use App\Events\OrderWasApproved;
 use App\Http\Controllers\AdminController;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
+use Guzzle;
 
 class ChargeCustomer
 {
@@ -38,5 +40,13 @@ class ChargeCustomer
                 "description" => "Event charge"
             ]
         );
+
+        \Mail::send('emails.orderConfirmation', [], function($message)
+        {
+            $message->to('casper.aarby.sorensen@gmail.com')
+                ->from('casper.aarby.sorensen@gmail.com')
+                ->subject('Welcome!');
+        });
+
     }
 }
