@@ -14,17 +14,18 @@ use App\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
-class CartController extends Controller
+class CartController extends BaseController
 {
+    /**
+     * CartController constructor.
+     */
+    public function __construct(){
+        parent::__construct();
+    }
+
     public function showCart() {
-        $cartContent = Cart::content();
-        $cartTotal = Cart::total();
 
-        // Get the price with VAT
-        $withVat = \VatCalculator::calculate($cartTotal, 'DK');
-        $taxRate = \VatCalculator::getTaxRate() * 100;
-
-        return view('frontend.cart', compact('cartContent', 'cartTotal', 'withVat', 'taxRate'));
+        return view('frontend.cart');
     }
 
     public function addItemToCart() {
@@ -69,10 +70,7 @@ class CartController extends Controller
 
     public function showCheckout() {
 
-        $cartContent = Cart::content();
-        $cartTotal = Cart::total();
-
-        return view('frontend.checkout', compact('cartContent', 'cartTotal'));
+        return view('frontend.checkout');
     }
 
     public function verifyPayment() {
@@ -85,8 +83,13 @@ class CartController extends Controller
 
         $user = Auth::user();
 
+        // Get the carts content (serverside)
+        $cartTotal = Cart::total();
+
+        $grossPrice = \VatCalculator::calculate($cartTotal, 'DK');
+
         // Get the amount total in the smallest denominator
-        $amount = Cart::total() * 100;
+        $amount = $grossPrice * 100;
 
         $customer = \Stripe\Customer::create([
                 "source" => $token,

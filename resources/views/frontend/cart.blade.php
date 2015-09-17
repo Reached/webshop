@@ -16,8 +16,8 @@
         {!! Form::close() !!}
     @endforeach
 
-    <p>Total: {{ $cartTotal }} DKK</p>
-    <p>Total with VAT ({{ $taxRate }}% ): {{ $withVat }} DKK</p>
+    <p>Subtotal: {{ $cartTotal }} DKK</p>
+    <p>Total: ({{ $taxRate }}% ): {{ $withVat }} DKK</p>
     {!! Form::open(['url' => '/cart/removeall']) !!}
     {!! Form::submit('Remove all items', ['class' => 'button']) !!}
     {!! Form::close() !!}
