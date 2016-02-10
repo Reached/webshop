@@ -11,12 +11,13 @@
 */
 
 // Show the frontpage
-use App\Events\PodcastWasPurchased;
+Route::get('/', 'ProductsController@showFrontpage');
 
-Route::get('/', 'ProductsController@showAllProducts');
+// Show a single product
+Route::get('/product/{slug}', 'ProductsController@showSingleProduct');
 
-// Show the frontpage
-Route::get('/product/{id}', 'ProductsController@showSingleProduct');
+Route::get('/categories', 'CategoriesController@showAllProducts');
+Route::get('/categories/{slug}', 'CategoriesController@showSingleCategory');
 
 // Show the shopping cart
 Route::get('/cart', 'CartController@showCart');
@@ -45,6 +46,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', 'AdminController@showDashboard');
     Route::get('/orders', 'AdminController@showOrders');
     Route::post('/orders/approve', 'AdminController@approveOrder');
+
+    Route::get('/products', 'ProductsController@showAllProductsAdmin');
+    Route::get('/products/create', 'ProductsController@createNewProductPage');
+    Route::post('/products/store', 'ProductsController@storeNewProduct');
+    Route::get('/products/show/{productId}', 'ProductsController@adminShowProduct');
+    Route::post('/products/show/{productId}/images', 'ProductsController@storeNewImages');
+
+    Route::get('/categories/create', 'CategoriesController@createNewCategoryPage');
+    Route::post('/categories/store', 'CategoriesController@storeNewCategory');
 
 });
 

@@ -1,5 +1,5 @@
 @if(Auth::user())
-Hi {{ Auth::user()->name }}
+{{ Auth::user()->name }}
   <a href="/logout">Log out</a>
 @endif
 <header class="main-nav">
@@ -14,7 +14,7 @@ Hi {{ Auth::user()->name }}
 
 <a href="/" class="logo"><img src="/images/logo.svg"></a>
     <ul class="nav">
-      <li><a href="#">Our Products</a></li>
+      <li><a href="/categories/all">Our Products</a></li>
       <li><a href="#">About Us</a></li>
       <li><a href="#">Contact Us</a></li>
       <li class="shopping-cart">

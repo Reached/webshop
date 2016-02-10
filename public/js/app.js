@@ -5,7 +5,7 @@ function incrementCount() {
 (function() {
         var stripeBilling = {
             init: function() {
-                this.form = $('#billing-form');
+                this.form = $('#payment-form');
                 this.submitButton = this.form.find('input[type=submit]');
 
                 var stripeKey = 'pk_test_4VelJUqrjkHEk1VkRvugyM94'; //$('meta[name="publishable-key"]').attr('content');
@@ -46,10 +46,12 @@ function incrementCount() {
 
         stripeBilling.init();
 
-    var submitAjaxRequest = function(e) {
+        var submitAjaxRequest = function(e) {
+
         var form = $(this);
         var method = form.find('input[name="_method"]').val() || 'POST';
         var submitButton = form.find('input[type="submit"]');
+
         $.ajaxSetup({
             beforeSend:function(){
                 submitButton.addClass('disabled').attr('disabled', true);

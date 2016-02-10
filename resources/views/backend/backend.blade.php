@@ -6,13 +6,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/vendor/semantic-ui/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/css/backend.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css">
     <title>Webshop</title>
 </head>
 <body>
     @include('backend.partials.navigation')
     @yield('dashboard')
     @yield('content')
+    @yield('products')
 
-
+    @yield('scripts.footer')
 </body>
 </html>

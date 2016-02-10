@@ -8,6 +8,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use Guzzle;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class ChargeCustomer
 {
@@ -31,9 +33,9 @@ class ChargeCustomer
     {
         $order = $event->order;
 
-        \Stripe\Stripe::setApiKey(env('STRIPE_API_KEY'));
+        Stripe::setApiKey(env('STRIPE_API_KEY'));
 
-        $charge = \Stripe\Charge::create([
+        $charge = Charge::create([
                 "amount" => $order->amount, // amount in cents, again
                 "currency" => "dkk",
                 "customer" => $order->stripe_billing_id,

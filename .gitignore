@@ -3,6 +3,8 @@
 Homestead.yaml
 .idea
 .env
+public/products/photos
+public/webshop.dev/products/photos
 
 *.xml
 

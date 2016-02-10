@@ -2,7 +2,7 @@
     <div class="item">
         <img src="/images/logo.svg">
     </div>
-    <a class="item">
+    <a class="item" href="/admin/products">
         <i class="star icon"></i>
         Products
     </a>
@@ -20,7 +20,7 @@
     </a>
     <div class="right menu">
         <div class="ui item">
-            Hello, {{ Auth::user()->name  }}
+            Hello, {{ Auth::user()->first_name }}
         </div>
         <div class="item">
             <a class="ui red button" href="/logout">Log out</a>

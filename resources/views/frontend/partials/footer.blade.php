@@ -8,6 +8,7 @@
     </div>
 </footer>
 
+<script type="text/javascript" src="/js/vat_calculator.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript" src="/js/app.js"></script>

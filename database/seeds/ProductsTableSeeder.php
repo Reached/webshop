@@ -17,12 +17,18 @@ class ProductsTableSeeder extends Seeder
 
         $categories = Category::get()->lists('id')->all();
 
-        foreach(range(1,50) as $index){
+        $product_name = $faker->word;
+
+        foreach(range(1,25) as $index){
             $products = Product::create([
-                'product_name' => $faker->word,
-                'product_image' => $faker->imageUrl($width = 400, $height = 400),
-                'product_price' => $faker->randomNumber(2),
+                'product_name' => $product_name,
+                'product_price' => $faker->numberBetween(2),
+                'long_description' => $faker->paragraph(3),
+                'short_description' => $faker->sentence(6),
+                'meta_description' => $faker->sentence(1),
+                'is_active' => $faker->boolean(50),
                 'category_id' => $faker->randomElement($categories),
+                'slug' => $product_name
             ]);
         }
     }
