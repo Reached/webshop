@@ -79,7 +79,8 @@ class CartController extends BaseController
         return view('frontend.checkout');
     }
 
-    public function verifyPayment(Request $request) {
+    public function verifyPayment(Request $request)
+    {
         // Set your secret key: remember to change this to your live secret key in production
         // See your keys here https://dashboard.stripe.com/account/apikeys
         Stripe::setApiKey(env('STRIPE_API_KEY'));
@@ -93,55 +94,48 @@ class CartController extends BaseController
         $street = $request->input('street');
 
         $emailCheck = User::where('email', $email)->value('email');
-        $setting = Setting::find(1);
-        $chargeUser =  $setting->charge_directly;
 
-        if ($chargeUser === false) {
-            // If the email doesn't exist in the database create new customer and user record
-            if (!isset($emailCheck)) {
-                // Create a new Stripe customer
-                try {
-                    $customer = Customer::create([
-                        'source' => $token,
-                        'email' => $email,
-                        'metadata' => [
-                            "First Name" => $first_name,
-                            "Last Name" => $last_name,
-                            '>ip' => $zip,
-                            'Street' => $street
-                        ]
-                    ]);
-                } catch (Card $e) {
-                    return redirect()->back()
-                        ->withErrors($e->getMessage())
-                        ->withInput();
-                }
-
-                $customerID = $customer->id;
-
-                // Create a new user in the database with Stripe
-                $user = User::create([
-                    'first_name' => $first_name,
-                    'last_name' => $last_name,
+        // If the email doesn't exist in the database create new customer and user record
+        if (!isset($emailCheck)) {
+            // Create a new Stripe customer
+            try {
+                $customer = Customer::create([
+                    'source' => $token,
                     'email' => $email,
-                    'zip' => $zip,
-                    'street' => $street,
-                    'stripe_customer_id' => $customerID,
+                    'metadata' => [
+                        "First Name" => $first_name,
+                        "Last Name" => $last_name,
+                        '>ip' => $zip,
+                        'Street' => $street
+                    ]
                 ]);
-            } else {
-                $customerID = User::where('email', $email)->value('stripe_customer_id');
-                $user = User::where('email', $email)->first();
+            } catch (Card $e) {
+                return redirect()->back()
+                    ->withErrors($e->getMessage())
+                    ->withInput();
             }
+
+            $customerID = $customer->id;
+
+            // Create a new user in the database with Stripe
+            $user = User::create([
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'email' => $email,
+                'zip' => $zip,
+                'street' => $street,
+                'stripe_customer_id' => $customerID,
+            ]);
+        } else {
+            $customerID = User::where('email', $email)->value('stripe_customer_id');
+            $user = User::where('email', $email)->first();
+        }
 
             // Get the carts content
             $cartTotal = Cart::total();
 
-            // Look up the users ip, and put the right amount of tax according to this
-            $countryCode = VatCalculator::getIPBasedCountry();
-            $grossPrice = \VatCalculator::calculate($cartTotal, 'DK');
-
             // Get the amount total in the smallest denominator
-            $amount = $grossPrice * 100;
+            $amount = $this->calculateAmount($cartTotal);
 
             $billing_id = $customerID;
 
@@ -149,11 +143,16 @@ class CartController extends BaseController
 
             return 'Your order is now pending. The money will not be taken from your account before the products has been shipped.';
 
-        } else {
-            return 'The money has been taken from your account, HAHA!';
-        }
-
-
-
     }
+
+    public function calculateAmount($amount) {
+
+        $countryCode = 'DK';
+
+        $grossPrice = \VatCalculator::calculate($amount, $countryCode);
+        $amount = $grossPrice * 100;
+
+        return $amount;
+    }
+
 }

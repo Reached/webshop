@@ -13,6 +13,8 @@
 // Show the frontpage
 Route::get('/', 'ProductsController@showFrontpage');
 
+Route::get('/amount/{amount}', 'CartController@calculateAmount');
+
 // Show a single product
 Route::get('/product/{slug}', 'ProductsController@showSingleProduct');
 

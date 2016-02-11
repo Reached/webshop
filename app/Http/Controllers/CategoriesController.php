@@ -34,7 +34,6 @@ class CategoriesController extends Controller
     }
 
     public function createNewCategoryPage() {
-
         return view('backend.categories.create');
     }
 
