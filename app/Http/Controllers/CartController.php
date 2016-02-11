@@ -147,7 +147,7 @@ class CartController extends BaseController
 
     public function calculateAmount($amount) {
 
-        $countryCode = 'DK';
+        $countryCode = 'EE';
 
         $grossPrice = \VatCalculator::calculate($amount, $countryCode);
         $amount = $grossPrice * 100;
