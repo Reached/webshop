@@ -1,14 +1,10 @@
-function incrementCount() {
-    count++;
-}
-
 (function() {
         var stripeBilling = {
             init: function() {
                 this.form = $('#payment-form');
                 this.submitButton = this.form.find('input[type=submit]');
 
-                var stripeKey = 'pk_test_4VelJUqrjkHEk1VkRvugyM94'; //$('meta[name="publishable-key"]').attr('content');
+                var stripeKey = $('meta[name="publishable-key"]').attr('content');
 
                 Stripe.setPublishableKey(stripeKey);
 

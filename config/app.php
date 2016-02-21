@@ -135,8 +135,10 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        Mpociot\VatCalculator\VatCalculatorServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Aloha\Twilio\Support\Laravel\ServiceProvider::class,
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+        Mpociot\VatCalculator\VatCalculatorServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -193,6 +195,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Cart'      => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Twilio'    => Aloha\Twilio\Support\Laravel\Facade::class,
+        'VatCalculator' => Mpociot\VatCalculator\Facades\VatCalculator::class,
 
     ],
 

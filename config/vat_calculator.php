@@ -1,10 +1,9 @@
 <?php
 
 /**
- * This file is part of VatCalculator
+ * This file is part of VatCalculator.
  *
  * @license MIT
- * @package VatCalculator
  */
 
 return [
@@ -22,5 +21,31 @@ return [
     */
     'rules' => [
         // 'XX' => 0.17,
+        'NO' => 0.25,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Predefined routes
+    |--------------------------------------------------------------------------
+    |
+    | The VAT calculator comes with a number of useful predefined routes
+    | that allow you to use the VAT calculator JS toolkit. If you
+    | don't want the routes to be registered, set this variable
+    | to false.
+    |
+    */
+    'use_routes' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Business country code
+    |--------------------------------------------------------------------------
+    |
+    | This should be the country code where your business is located.
+    | The business country code is used to calculate the correct VAT rate
+    | when charging a B2B (company) customer inside your business country.
+    |
+    */
+    'business_country_code' => 'DK',
 ];

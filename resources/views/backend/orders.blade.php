@@ -5,7 +5,7 @@
 
     @foreach($orders as $order)
     <div>{{$order->id}}
-        @if ( $order->confirmed == 0 )
+        @if ( !$order->confirmed )
             <form action="orders/approve" method="POST">
                 {!! csrf_field() !!}
                 <input type="hidden" name="order_id" value="{{$order->id}}">
@@ -13,7 +13,7 @@
             </form>
             <div class="">The order is not confirmed yet</div>
         @endif
-        @if ( $order->confirmed == 1 )
+        @if ( $order->confirmed )
             <div class="">The order was confirmed</div>
         @endif
     </div>

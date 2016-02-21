@@ -10,7 +10,10 @@
 |
 */
 
+use App\Http\Controllers\VatController;
+
 // Show the frontpage
+
 Route::get('/', 'ProductsController@showFrontpage');
 
 Route::get('/amount/{amount}', 'CartController@calculateAmount');
@@ -21,23 +24,30 @@ Route::get('/product/{slug}', 'ProductsController@showSingleProduct');
 Route::get('/categories', 'CategoriesController@showAllProducts');
 Route::get('/categories/{slug}', 'CategoriesController@showSingleCategory');
 
-// Show the shopping cart
-Route::get('/cart', 'CartController@showCart');
+Route::group(['middleware' => ['web']], function () {
+    // Show the shopping cart
+    Route::get('/cart', 'CartController@showCart');
 
 // Remove a cart item
-Route::post('/cart/remove', 'CartController@removeCartItem');
+    Route::post('/cart/remove', 'CartController@removeCartItem');
 
 // Remove all items from cart
-Route::post('/cart/removeall', 'CartController@removeAllCartItems');
+    Route::post('/cart/removeall', 'CartController@removeAllCartItems');
 
 // Add a cart item
-Route::post('/cart', 'CartController@addItemToCart');
+    Route::post('/cart', 'CartController@addItemToCart');
 
 // Update a cart item
-Route::post('/cart/updateitem', 'CartController@updateCartItem');
+    Route::post('/cart/updateitem', 'CartController@updateCartItem');
 
 // Checkout view
-Route::get('/cart/checkout', 'CartController@showCheckout');
+    Route::get('/cart/checkout', 'CartController@showCheckout');
+
+    Route::get('vatcalculator/tax-rate-for-country/{country?}', 'VatController@getTaxRateForCountry');
+    Route::get('vatcalculator/calculate', 'VatController@calculateGrossPrice');
+    Route::get('vatcalculator/country-code', 'VatController@getCountryCode');
+    Route::get('vatcalculator/validate-vat-id/{vat_id}', 'VatControllerController@validateVATID');
+});
 
 // Verify the payment
 Route::post('/cart/checkout', 'CartController@verifyPayment');
@@ -57,11 +67,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/categories/create', 'CategoriesController@createNewCategoryPage');
     Route::post('/categories/store', 'CategoriesController@storeNewCategory');
-
 });
 
 // Authentication routes
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
+
 

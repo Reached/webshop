@@ -4,28 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePhotoRequest;
 use App\Http\Requests\StoreProductRequest;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Product;
-use App\Http\Controllers\Controller;
 use App\Photo;
 use App\Category;
 
 class ProductsController extends Controller
 {
     public function showFrontpage() {
-
         $products = Product::where('is_active', true)->get();
 
-        return view('frontend.products.products', compact('products'));
+        return view('frontend.products.productList', compact('products'));
     }
 
     public function showSingleProduct($slug) {
         $product = Product::findBySlug($slug);
-        $productPhotos = $product->photos;
+        $images = $product->getMedia();
 
-        return view('frontend.show', compact('product', 'productPhotos'));
+        return view('frontend.products.show', compact('product', 'images'));
     }
 
     public function showAllProductsAdmin() {
@@ -60,9 +56,10 @@ class ProductsController extends Controller
     public function storeNewImages(StorePhotoRequest $request) {
         $productId = $request->input('productId');
         $product = Product::findOrFail($productId);
-        $photo = Photo::fromForm($request->file('photo'));
 
-        $product->addPhoto($photo);
+        $path = $request->file('photo');
+
+        $product->addMedia($path)->toCollection('images');
 
         return response()->json(['success' => true, 'Message' => 'Your images were successfully uploaded']);
     }

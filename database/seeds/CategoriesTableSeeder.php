@@ -18,8 +18,7 @@ class CategoriesTableSeeder extends Seeder
 
         foreach(range(1,5) as $index){
             Category::create([
-                'category_name' => $category_name,
-                'slug' => $category_name
+                'category_name' => $category_name
             ]);
         }
     }

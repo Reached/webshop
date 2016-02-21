@@ -2,7 +2,7 @@
 
 @section('content')
     <nav>
-        <a href="/categories" class="active"></a>
+    <a href="/categories" class="active"></a>
     @foreach($categories as $category)
         <a href="/categories/{{ $category->slug }}">{{ $category->category_name }}</a>
     @endforeach

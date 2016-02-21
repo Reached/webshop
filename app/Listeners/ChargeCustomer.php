@@ -7,22 +7,14 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
+use Response;
 use Guzzle;
 use Stripe\Charge;
 use Stripe\Stripe;
+use Twilio;
 
 class ChargeCustomer
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Handle the event.
      *
@@ -31,24 +23,30 @@ class ChargeCustomer
      */
     public function handle(OrderWasApproved $event)
     {
-        $order = $event->order;
+
+        $billingId = $event->order['stripe_billing_id'];
+        $amount = $event->order['amount'];
 
         Stripe::setApiKey(env('STRIPE_API_KEY'));
 
-        $charge = Charge::create([
-                "amount" => $order->amount, // amount in cents, again
-                "currency" => "dkk",
-                "customer" => $order->stripe_billing_id,
-                "description" => "Event charge"
-            ]
-        );
+            $data = Charge::create([
+                    'amount' => $amount, // amount in cents, again
+                    'currency' => 'dkk',
+                    'customer' => $billingId,
+                    'description' => 'Event charge'
+                ]
+            );
 
-        \Mail::send('emails.orderConfirmation', [], function($message)
+        Mail::send('emails.orderConfirmation', ['data' => $data], function($message)
         {
             $message->to('casper.aarby.sorensen@gmail.com')
                 ->from('casper.aarby.sorensen@gmail.com')
                 ->subject('Welcome!');
         });
 
+        // Send an SMS if the user has allowed it
+        if ($event->order['sendSms'] == true) {
+            Twilio::message('+4528559088', 'Your order was shipped!');
+        }
     }
 }

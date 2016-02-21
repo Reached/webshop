@@ -4,11 +4,6 @@
     <h1>{{$product->product_name}}</h1>
     <h2>Upload pictures of the product</h2>
 
-    @foreach($photos as $photo)
-        <li>{{ $photo->id }}
-            <img src="{{ $photo->path }}" alt="{{$product->product_name}}"></li>
-    @endforeach
-
     <form action="/admin/products/show/{{$product->id}}/images" class="dropzone" id="dropzone">
         {!! csrf_field() !!}
         <input type="hidden" name="productId" value="{{ $product->id }}">

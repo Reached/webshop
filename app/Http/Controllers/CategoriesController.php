@@ -13,9 +13,11 @@ use App\Product;
 class CategoriesController extends Controller
 {
     public function showAllProducts() {
+
         $categories = Category::with('products')
             ->where('is_active', true)
             ->has('products')->get();
+        //$categories = Category::all();
 
         $products = Product::where('is_active', true)->get();
 
@@ -44,4 +46,5 @@ class CategoriesController extends Controller
 
         return response()->json(['success' => true, 'Message' => 'Your category was created.']);
     }
+
 }

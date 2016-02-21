@@ -3,7 +3,7 @@
     <article class="product">
         <a href="/product/{{ $product->slug }}">
         <div class="img-container">
-          <img src="{{ $product->product_image }}">
+            <img src="{{ $product->getFirstMediaUrl('images', 'large') }}">
           <!-- <button class="put-to-basket">Add to cart</button> -->
         </div>
           <div class="meta">
@@ -11,12 +11,7 @@
             <em class="price">${{ $product->product_price / 100 }}</em>
           </div>
         </a>
-        <form method="POST" action="/cart" data-remote>
-            {!! csrf_field() !!}
-            <input type="hidden" name="product_price" value="{{ $product->product_price }}">
-            <input type="hidden" name="id" value="{{ $product->id }}">
-            <input type="submit">
-        </form>
+        @include('frontend.partials.addToCartForm')
     </article>
 </div>
 @endforeach

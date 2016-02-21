@@ -3,13 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Photo;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
-class Product extends Model implements SluggableInterface
+class Product extends Model implements SluggableInterface, HasMedia, HasMediaConversions
 {
     use SluggableTrait;
+    use HasMediaTrait;
 
     protected $sluggable = [
         'build_from' => 'product_name',
@@ -31,11 +34,13 @@ class Product extends Model implements SluggableInterface
         'is_active' => 'boolean'
     ];
 
-    public function photos() {
-        return $this->hasMany('App\Photo');
-    }
-
-    public function addPhoto(Photo $photo) {
-        return $this->photos()->save($photo);
+    public function registerMediaConversions()
+    {
+        $this->addMediaConversion('large')
+            ->setManipulations(['w' => 400, 'h' => 400]);
+        $this->addMediaConversion('medium')
+            ->setManipulations(['w' => 300, 'h' => 300]);
+        $this->addMediaConversion('small')
+            ->setManipulations(['w' => 200, 'h' => 200]);
     }
 }

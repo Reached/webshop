@@ -3,23 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\OrderWasPlaced;
-use App\Http\Controllers\CartController;
 use App\Order;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Auth;
 
 class CreateNewOrder
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // Nothing goes here, put it in the Event instead.
-    }
-
     /**
      * Handle the event.
      *
@@ -30,10 +18,14 @@ class CreateNewOrder
     {
         $amount = $event->amount;
         $billing_id = $event->billing_id;
+        $sendSms = $event->sendSms;
+        $checkUser = (Auth::check() ? Auth::user()->id : 1);
 
         Order::create([
            'amount' => $amount,
-           'stripe_billing_id' => $billing_id
+           'stripe_billing_id' => $billing_id,
+           'sendSms' => $sendSms,
+           'user_id' => $checkUser
         ]);
 
     }
