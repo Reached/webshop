@@ -12,20 +12,20 @@ class OrderWasPlaced extends Event
 
     public $amount;
     public $billing_id;
-    public $sendSms;
+    public $order;
 
     /**
      * Create a new event instance.
      *
      * @param Amount $amount
      * @param BillingId $billing_id
-     * @param SendSms $sendSms
+     * @param $order
      */
-    public function __construct($amount, $billing_id, $sendSms)
+    public function __construct($amount, $billing_id, $order)
     {
         $this->amount = $amount;
         $this->billing_id = $billing_id;
-        $this->sendSms = $sendSms;
+        $this->order = $order;
     }
 
     /**

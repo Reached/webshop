@@ -1,29 +1,42 @@
-<div class="ui labeled icon menu">
-    <div class="item">
-        <img src="/images/logo.svg">
+
+<nav class="backend-navigation">
+    <div class="logo-box">
+        <a href="#" class="logo">
+            <div class="logo-symbol"></div>
+        </a>
     </div>
-    <a class="item" href="/admin/products">
-        <i class="star icon"></i>
-        Products
+    <div class="regular-links">
+    <a href="/admin/orders" class="{{ isActive('admin/orders') }} nav-item">
+        <div class="icon icon-orders"></div>
+        <p>Orders</p>
     </a>
-    <a class="item">
-        <i class="cubes icon"></i>
-        Orders
+
+    <a href="/admin/products" class="{{ isActive('admin/products') }} nav-item">
+        <div class="icon icon-products"></div>
+        <p>Products</p>
     </a>
-    <a class="item">
-        <i class="users icon"></i>
-        Users
+
+    <a href="#" class="nav-item">
+        <div class="icon icon-statistics"></div>
+        <p>Statistics</p>
     </a>
-    <a class="item">
-        <i class="cogs icon"></i>
-        Settings
+
+    <a href="#" class="nav-item">
+        <div class="icon icon-categories"></div>
+        <p>Categories</p>
     </a>
-    <div class="right menu">
-        <div class="ui item">
-            Hello, {{ Auth::user()->first_name }}
-        </div>
-        <div class="item">
-            <a class="ui red button" href="/logout">Log out</a>
-        </div>
+
+    <a href="#" class="nav-item">
+        <div class="icon icon-settings"></div>
+        <p>Settings</p>
+    </a>
+
+    <a href="#" class="nav-item">
+        <div class="icon icon-profile"></div>
+        <p>Profile</p>
+    </a>
     </div>
-</div>
+    {{--Hello {{ Auth::user()->first_name }}--}}
+</nav>
+
+

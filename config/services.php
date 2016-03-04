@@ -28,4 +28,7 @@ return [
         'secret' => '',
         'region' => 'us-east-1',
     ],
+    'mixpanel' => [
+        'token' => env('MIXPANEL_TOKEN'),
+    ],
 ];

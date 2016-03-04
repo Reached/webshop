@@ -1,0 +1,28 @@
+.button {
+  appearance: none;
+  border: none;
+  border-radius: $border-radius;
+  padding: 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+.button-yellow {
+  height: 60px;
+  width: 160px;
+  background: $secondary-color;
+  color: #ffffff;
+  margin-left: 15px;
+  border: 1px solid #E3AE39;
+  text-shadow: 0 1px 0 #B59142;
+  box-shadow: 0 3px 0 0 #E2B450;
+}
+
+.confirm {
+  background: $success-color;
+  height: 30px;
+  padding: 0 10px;
+  color: $white;
+  border: 1px solid darken($success-color, 15%);
+}

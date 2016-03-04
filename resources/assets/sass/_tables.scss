@@ -1,0 +1,17 @@
+.default-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.default-table thead {
+  text-align: left;
+  border-bottom: 1px solid $border-color;
+}
+
+.default-table thead th {
+  padding-bottom: 20px;
+}
+
+.default-table tbody td {
+  padding-top: 20px;
+}

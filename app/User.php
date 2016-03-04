@@ -18,6 +18,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
+    protected $casts = [
+      'is_admin' => 'boolean'
+    ];
 
     /**
      * The attributes that are mass assignable.

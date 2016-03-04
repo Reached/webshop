@@ -16,32 +16,33 @@ use App\Http\Controllers\VatController;
 
 Route::get('/', 'ProductsController@showFrontpage');
 
-Route::get('/amount/{amount}', 'CartController@calculateAmount');
-
-// Show a single product
-Route::get('/product/{slug}', 'ProductsController@showSingleProduct');
-
-Route::get('/categories', 'CategoriesController@showAllProducts');
-Route::get('/categories/{slug}', 'CategoriesController@showSingleCategory');
+//Route::get('/categories', 'CategoriesController@showAllProducts');
+//Route::get('/categories/{slug}', 'CategoriesController@showSingleCategory');
 
 Route::group(['middleware' => ['web']], function () {
     // Show the shopping cart
     Route::get('/cart', 'CartController@showCart');
 
-// Remove a cart item
+    // Remove a cart item
     Route::post('/cart/remove', 'CartController@removeCartItem');
 
-// Remove all items from cart
+    // Remove all items from cart
     Route::post('/cart/removeall', 'CartController@removeAllCartItems');
 
-// Add a cart item
+    // Add a cart item
     Route::post('/cart', 'CartController@addItemToCart');
 
-// Update a cart item
+    // Show a single product
+    Route::get('/product/{slug}', 'ProductsController@showSingleProduct');
+
+    // Update a cart item
     Route::post('/cart/updateitem', 'CartController@updateCartItem');
 
-// Checkout view
-    Route::get('/cart/checkout', 'CartController@showCheckout');
+    // Checkout view
+    Route::get('/cart/checkout', 'CheckoutController@showCheckout');
+
+    // Verify the payment
+    Route::post('/cart/checkout', 'CheckoutController@verifyPayment');
 
     Route::get('vatcalculator/tax-rate-for-country/{country?}', 'VatController@getTaxRateForCountry');
     Route::get('vatcalculator/calculate', 'VatController@calculateGrossPrice');
@@ -49,15 +50,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('vatcalculator/validate-vat-id/{vat_id}', 'VatControllerController@validateVATID');
 });
 
-// Verify the payment
-Route::post('/cart/checkout', 'CartController@verifyPayment');
+
 
 // Admin routes
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/dashboard', 'AdminController@showDashboard');
-    Route::get('/orders', 'AdminController@showOrders');
-    Route::post('/orders/approve', 'AdminController@approveOrder');
+    Route::get('/orders', 'OrdersController@showOrders');
+    Route::get('/orders/{orderId}', 'OrdersController@showSingleOrder');
+    Route::post('/orders/billy', 'OrdersController@sendToBilly');
+    Route::post('/orders/approve', 'OrdersController@approveOrder');
 
     Route::get('/products', 'ProductsController@showAllProductsAdmin');
     Route::get('/products/create', 'ProductsController@createNewProductPage');

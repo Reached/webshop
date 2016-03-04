@@ -1,4 +1,4 @@
-@extends('backend.backend')
+@extends('backend.backendLayout')
 
 @section('content')
     <a href="/admin/products/create" class="ui button">Create new product</a>

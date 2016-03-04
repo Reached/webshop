@@ -1,0 +1,26 @@
+.backend-navigation {
+  width: 120px;
+  min-height: 100vh;
+  background: $white;
+  box-shadow: 0 1px 10px 0 rgba($text-color, .25);
+  position: relative;
+  z-index: 1;
+}
+
+.nav-item {
+  text-align: center;
+  display: block;
+  margin-bottom: 40px;
+  &.active {
+    .icon:before {
+      color: $primary-color;
+    }
+  }
+}
+
+.logo-box {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

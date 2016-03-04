@@ -1,4 +1,4 @@
-@extends('frontend.shop')
+@extends('frontend.shopLayout')
 
 @section('shoppingCart')
     <a href="/">Continue shopping?</a>
@@ -6,7 +6,7 @@
         <div>
             <p>{{ $content->name }}</p>
             <p>Quantity: {{ $content->qty }}</p>
-            <p>Price: {{ $content->price }}</p>
+            <p>Price: {{ getRoundedValue($content->price) }}</p>
             <img src="{{ $content->options->imagePath }}">
 
             <form action="/cart/remove" method="post">
@@ -29,8 +29,8 @@
 
     <hr>
 
-    <p>Subtotal: {{ $cartTotal }} DKK</p>
-    <p>Total: ({{ $taxRate }}%): {{ $withVat }} DKK</p>
+    <p>Subtotal: {{ getRoundedValue($cartTotal) }} DKK</p>
+    <p>Total: ({{ $taxRate }}%): {{ getRoundedValue($withVat) }} DKK</p>
 
     <form action="/cart/removeall" method="post" data-remote>
         {{ csrf_field() }}

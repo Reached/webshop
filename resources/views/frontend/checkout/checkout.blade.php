@@ -1,7 +1,7 @@
-@extends('frontend.shop')
+@extends('frontend.shopLayout')
 
 @section('stripeKey')
-    <meta name="publishable-key" content="{{ env('STRIPE_API_KEY') }}">
+    <meta name="publishable-key" content="{{ env('STRIPE_PUBLIC_KEY') }}">
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
     <h2>Shopping cart summary:</h2>
 
         <h3>Address information: </h3>
-        <form method="post" action="/cart/checkout" id="payment-form" data-amount="{{ $cartTotal * 100 }}">
+        <form method="post" action="/cart/checkout" id="payment-form" data-amount="{{ $cartTotal }}">
             {{ csrf_field() }}
 
             <label for="first_name">First name</label>
@@ -25,6 +25,10 @@
             <label for="email">Email</label>
             <input type="text" id="email" name="email" placeholder="Email"
                    value="@if (Auth::user()) {{ Auth::user()->email }}@endif" data-stripe="email">
+
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" placeholder="Phone"
+                   value="@if (Auth::user()) {{ Auth::user()->phone }}@endif">
 
             <label for="street">Street</label>
             <input type="text" id="street" name="street" placeholder="Street address"
@@ -53,7 +57,7 @@
         <hr>
         <ul>
             @foreach($cartContent as $content)
-                <li>{{ $content->name }} - {{ $content->price }} DKK</li>
+                <li>{{ $content->name }} - {{ getRoundedValue($content->price) }}</li>
             @endforeach
         </ul>
         <strong>Subtotal</strong>: <span class="vat-subtotal"></span>
@@ -91,5 +95,4 @@
         <input type="submit" value="Pay!">
 
         </form>
-
 @endsection

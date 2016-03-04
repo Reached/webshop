@@ -1,4 +1,4 @@
-@extends('backend.backend')
+@extends('backend.backendLayout')
 
 @section('products')
     <h1>{{$product->product_name}}</h1>

@@ -1,4 +1,4 @@
-@extends('frontend.shop')
+@extends('frontend.shopLayout')
 
 @section('content')
 <!-- resources/views/auth/login.blade.php -->

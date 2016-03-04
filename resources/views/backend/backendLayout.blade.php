@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/vendor/semantic-ui/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/backend.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css">
     <title>Webshop</title>
+    <meta id="token" content="{{ csrf_token() }}">
 </head>
 <body>
     @include('backend.partials.navigation')
     @yield('dashboard')
-    @yield('content')
+    <div class="app-container">
+        @yield('content')
+    </div>
     @yield('products')
-
-    @yield('scripts.footer')
+    @yield('scripts')
 </body>
 </html>

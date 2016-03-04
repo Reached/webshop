@@ -3,7 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\OrderWasApproved;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrdersController;
+use App\Webshop\Providers\BillysBilling;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
@@ -12,6 +13,7 @@ use Guzzle;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Twilio;
+use Carbon\Carbon;
 
 class ChargeCustomer
 {
@@ -48,5 +50,25 @@ class ChargeCustomer
         if ($event->order['sendSms'] == true) {
             Twilio::message('+4528559088', 'Your order was shipped!');
         }
+
+        $billy = new BillysBilling(env('BILLY_KEY'));
+
+        $date = Carbon::now()->format('Y-m-d');
+
+        $billy->makeBillyRequest('POST', '/bankPayments', [
+            'bankPayment' => [
+                'organizationId' => env('BILLY_ORGANIZATION'),
+                'contactId' => $event->order['billys_contact_id'],
+                'entryDate' => $date,
+                'cashAmount' => $amount,
+                'cashSide' => 'debit',
+                'cashAccountId' => 'YYYHJlZ4Rceu0ApFuoVBWQ',
+                'associations' => [
+                    [
+                        'subjectReference' => 'invoice:' . $event->order['billys_invoice_id'],
+                    ]
+                ],
+            ]
+        ]);
     }
 }

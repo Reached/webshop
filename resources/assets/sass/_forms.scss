@@ -1,0 +1,19 @@
+.default-input {
+  appearance: none;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  color: $text-color;
+  padding: 0 0 0 20px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.search-input {
+  height: 60px;
+  width: 50%;
+}
+
+.search-form {
+  margin-bottom: 40px;
+}

@@ -27,7 +27,8 @@ class Product extends Model implements SluggableInterface, HasMedia, HasMediaCon
         'product_price',
         'category_id',
         'is_active',
-        'meta_description'
+        'meta_description',
+        'billys_product_id'
     ];
 
     protected $casts = [

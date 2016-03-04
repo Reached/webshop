@@ -8,7 +8,7 @@
         </div>
           <div class="meta">
             <h2>{{ $product->product_name }}</h2>
-            <em class="price">${{ $product->product_price / 100 }}</em>
+            <em class="price">{{ getRoundedValue($product->product_price) }}</em>
           </div>
         </a>
         @include('frontend.partials.addToCartForm')

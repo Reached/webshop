@@ -1,4 +1,4 @@
-@extends('backend.backend')
+@extends('backend.backendLayout')
 
 @section('dashboard')
     <div class="container">
